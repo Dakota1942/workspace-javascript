@@ -335,16 +335,42 @@
 
             </p>
             <p>
-                <input type="button" value="Check Premium">
+                <input type="button" value="Check Premium" onclick="stuff()">
             </p>
-            <p id="result">
+            <p name="premiumA" id="premiumA">
 
             </p>
             <script>
                 function stuff() {
                     var rE = document.querySelector('input[name="coverage"]:checked');
                     var coverage = parseInt(rE.value);
-                    console.log(coverage);
+                    var agefactor = 0;
+                    // console.log(coverage);
+
+                    var index = document.getElementById('agegroup').selectedIndex;
+                    switch (index) {
+                        case 0:
+                            agefactor=.08;
+                            break;
+                        case 1:
+                            agefactor=.09;
+                            break;
+                        case 2:
+                            agefactor=.11;
+                            break;
+                        case 3:
+                            agefactor=.17;
+                            break;
+                    }
+
+                    var premium = 10 + (agefactor * coverage)/1000;
+                    if(agefactor==.08) {
+                        premiumA.animate([{transform:'scale(0.2)'}, {transform:'scale(1.5)'}], {duration:3000, fill:"forwards"});
+                    } else {
+                        premiumA.animate([{transform:'translate(0,0)'}, {transform:'translate(100px, 0)'}], {duration:3000, fill:"forwards"});
+                    }
+
+                    document.getElementById('premiumA').innerHTML=premium.toFixed(2);
                 }
                 var bE = document.querySelector('input[value="Check Premium"]');
                 bE.addEventListener('click', stuff, false);
@@ -352,16 +378,25 @@
         </div>
 
 
-
-
         <div class="practice">
             <h1>For Loop Practice 1 </h1>
             <p> Display the square of numer 1... N </p>
             <p> N = <input type="number" min="1" max="10" id="inputnumber1"> </p>
             <p>
-                <input type="button" value="Click for Square">
+                <input type="button" value="Click for Square" id="square" onclick="funct()">
             </p>
-
+            <p id="squared"> </p>
+            <script>
+                function funct() {
+                    var answer = 0;
+                    var n = parseInt(document.getElementById('inputnumber1').value);
+                    for(var i=1; i<n+1; i++) {
+                        answer = n * n;
+                        document.getElementById('squared').innerHTML=answer;
+                    }
+                }
+                document.getElementById('square').addEventListener('click', funct, false);
+            </script>
         </div>
 
 
