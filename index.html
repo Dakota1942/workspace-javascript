@@ -3,11 +3,37 @@
 <head>
     <meta charset="UTF-8">
 
-    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/main-old.css">
     <!-- Jquery library   ---->
     <script src="https://code.jquery.com/jquery-3.5.1.js"
         integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-
+    <script>
+        $(document).ready(function(){
+            $('body').hide().fadeIn(3000);
+            /*$('h1').click(function(){
+            window.alert('you clicked h1');
+            });
+            $('p').mouseover(function(){
+                document.getElementById('a').textContent="Hello";
+            });
+            $('p').mouseover(function(){
+                $(this).slideDown();
+            });*/
+            $('p').hide();
+            $('h1').click(function(){
+                $(this).parent().children('p').slideToggle();
+            });
+            $('input').each(function(){
+                var theID = $(this).attr('id');
+                console.log(theID);
+            });
+            // get images from page
+            $('img').each(function(){
+                var theSRC = $(this).attr('src');
+                console.log(theSRC);
+            });
+        });
+    </script>
 
 </head>
 
@@ -18,7 +44,7 @@
         </div>
 
         <div class="practice">
-            <h1>Hello world in JavaScript
+            <h1 id="a">Hello world in JavaScript
             </h1>
             <p>
                 Please display a hello world message in JavaScript. 
@@ -483,7 +509,19 @@
                 function changeImg() {
                     var num = Math.floor(Math.random()*6+1);
                     stats[num-1]++;
-                    console.log(stats);
+
+                    for(var i=0; i<=stats.length; i++) {
+                        console.log(stats[i]);
+                        //document.getElementById('r' + stats[i+1]).textContent=stats[i].toString();
+                    }
+                    document.getElementById('r1').textContent=stats[0].toString();
+                    document.getElementById('r2').textContent=stats[1].toString();
+                    document.getElementById('r3').textContent=stats[2].toString();
+                    document.getElementById('r4').textContent=stats[3].toString();
+                    document.getElementById('r5').textContent=stats[4].toString();
+                    document.getElementById('r6').textContent=stats[5].toString();
+
+
                     document.getElementById('dice').setAttribute('src', "img/die"+num+".png");
                 }
                 document.getElementById('roll').addEventListener('click', changeImg, false);
@@ -509,10 +547,21 @@
                 <img src="img/usca5.jpg" alt="usca">
             </div>
 			<script>
-				
+                // Automatic event
+                //setInterval(chgImage, 5000);
+                var index = 0;
+                var imglist = document.querySelectorAll('.img-container-hide');
+                // imglist[0].setAttribute('class', 'img-container');
+                function chgImage() {
+                    imglist[index].setAttribute('class', 'img-container-hide');
+                    index++;
+                    if(index==5) {
+                        index=0;
+                    }
+                    imglist[index].setAttribute('class', 'img-containter');
+                }
+
 			</script>
-
-
         </div>
 
 
@@ -557,14 +606,16 @@
             <h1>Continue other practices</h1>
             <a href="JSON.html">JSON Practice</a>
             <a href="element.html"> Element Practice </a>
+            
         </div>
 
 
 
     </div>
+    <!--
     <script src="script.js"> </script>
     <script src="js/practice.js"></script>
-
+    -->
 
 </body>
 
