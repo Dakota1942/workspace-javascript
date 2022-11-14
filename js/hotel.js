@@ -14,14 +14,29 @@ console.log(test.booked);
 // event
 $(function(){
     $('#submit').click(reservation);
+    $('#list').click(displayR);
 });
+
+var gGroup = new Array();
 
 function reservation() {
     var guest = {
         name: $('#name').val(),
-        numberofGuest: $('#number').val(),
+        numberofGuest: $('#numguests').val(),
         checkIn: $('#checkin').val(),
-        
-
+        checkOut: $('#checkout').val(),
+        roomType: $('#room').val(),
     };
+    $("p:first").html("Thank you for your reservation.");
+    gGroup.push(guest);
+    //console.log(gGroup);
+}
+
+function displayR() {
+    $("form").append("<table>");
+    for(var i in gGroup) {
+        var theguest = gGroup[i];
+        var row = "<tr> <td>" + theguest.name + "</tr> </td>";
+        $("table").append(row);
+    }
 }
